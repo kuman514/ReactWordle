@@ -20,7 +20,7 @@ function Board(props) {
       'u': 'Untried', 'v': 'Untried', 'w': 'Untried', 'x': 'Untried',
       'y': 'Untried', 'z': 'Untried'
     },
-    submitResult: [[], [], [], [], [], []]
+    submitResult: []
   });
 
   const onErase = () => {
@@ -54,23 +54,39 @@ function Board(props) {
     const newLetterResult = {
       ...status.letterResult
     };
+    const newSubmitResult = Array.from(status.submitResult);
+    const curSubmitReuslt = [];
     for (let i = 0; i < status.inputs[status.curTry].length; i++) {
       const curLetter = status.inputs[status.curTry][i];
+      let found = false;
+
       for (let j = 0; j < props.answer.length; j++) {
         if (curLetter === props.answer[j]) {
-          if (i == j) {
+          found = true;
+          if (i === j) {
             newLetterResult[curLetter] = 'Correct';
-            // Continue here
+            curSubmitReuslt.push('Correct');
           } else {
-            // Continue here
+            if (newLetterResult[curLetter] === 'Untried') {
+              newLetterResult[curLetter] = 'Existing';
+            }
+            curSubmitReuslt.push('Existing');
           }
           break;
         }
       }
+
+      if (!found) {
+        newLetterResult[curLetter] = 'Never';
+        curSubmitReuslt.push('Never');
+      }
     }
+    newSubmitResult.push(curSubmitReuslt);
 
     setStatus({
       ...status,
+      letterResult: newLetterResult,
+      submitResult: newSubmitResult,
       curTry: status.curTry + 1
     });
   };

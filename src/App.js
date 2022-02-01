@@ -7,7 +7,9 @@ function App() {
   return (
     <div className="App">
       <Title />
-      <Board />
+      <Board
+        answer={'react'}
+      />
     </div>
   );
 }

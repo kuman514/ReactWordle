@@ -14,11 +14,18 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.Untried {
+  background-color: #282c34;
+}
+
+.Correct {
+  background-color: #26b126;
+}
+
+.Existing {
+  background-color: #a70e9a;
+}
+
+.Never {
+  background-color: #282c34;
 }

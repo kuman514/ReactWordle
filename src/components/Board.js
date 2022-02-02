@@ -111,20 +111,23 @@ function Board(props) {
 
   return (
     <div className="Board">
-      {
-        [0, 1, 2, 3, 4, 5].map((index) => {
-          return (
-            <Line
-              key={`try_${index}`}
-              try={index}
-              submitted={index < status.curTry}
-              input={status.inputs[index]}
-              letterResult={status.letterResult}
-              submitResult={status.submitResult[index]}
-            />
-          );
-        })
-      }
+      <div className="Lines">
+        {
+          [0, 1, 2, 3, 4, 5].map((index) => {
+            return (
+              <Line
+                key={`try_${index}`}
+                try={index}
+                submitted={index < status.curTry}
+                input={status.inputs[index]}
+                letterResult={status.letterResult}
+                submitResult={status.submitResult[index]}
+              />
+            );
+          })
+        }
+      </div>
+      
       <TouchInput
         result={status.letterResult}
         onInput={onInput}

@@ -14,6 +14,50 @@
   color: #61dafb;
 }
 
+.Board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.Lines {
+  width: 40vh;
+  height: 48vh;
+  display: grid;
+  grid-template-rows: repeat(6, 1fr);
+}
+
+.Line {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.Tile {
+  border: solid 1px white;
+  margin: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.TouchInput {
+  height: 24vh;
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+}
+
+button {
+  all: unset;
+  min-width: 8vh;
+  height: 100%;
+}
+
+button:hover {
+  background-color: rgb(0, 168, 168);
+  cursor: pointer;
+}
+
 .Untried {
   background-color: #282c34;
 }

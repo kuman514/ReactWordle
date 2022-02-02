@@ -15,7 +15,7 @@ function Line(props) {
           return (
             <span
               key={`input_${props.try}-${index}`}
-              className={`${props.submitted ? props.submitResult[index] : ''}`}
+              className={`Tile ${props.submitted ? props.submitResult[index] : ''}`}
             >
               { item }
             </span>

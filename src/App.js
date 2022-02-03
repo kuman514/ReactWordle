@@ -16,6 +16,7 @@ function App() {
       />
       <Board
         answer={ANSWER}
+        questionNumber={QUESTION_NUMBER}
       />
     </div>
   );

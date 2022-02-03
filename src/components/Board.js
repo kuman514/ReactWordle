@@ -1,11 +1,14 @@
 import { useState } from 'react';
+
 import Line from './Line';
 import TouchInput from './TouchInput';
+import Result from './Result';
 
 function Board(props) {
   /*
     Props of Board
       - answer: string (length exactly 5)
+      - questionNumber: number
   */
 
   const [status, setStatus] = useState({
@@ -146,6 +149,23 @@ function Board(props) {
         onInput={onInput}
         onErase={onErase}
         onSubmit={onSubmit}
+      />
+
+      <Result
+        gameProcess={
+          (status.correctLetters === 5) ? (
+            'Complete'
+          ) : (
+            (status.curTry >= 6) ? (
+              'Failed'
+            ) : (
+              'Playing'
+            )
+          )
+        }
+        tries={status.curTry}
+        questionNumber={props.questionNumber}
+        submitResult={status.submitResult}
       />
     </div>
   );

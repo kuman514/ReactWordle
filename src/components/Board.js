@@ -20,7 +20,8 @@ function Board(props) {
       'u': 'Untried', 'v': 'Untried', 'w': 'Untried', 'x': 'Untried',
       'y': 'Untried', 'z': 'Untried'
     },
-    submitResult: []
+    submitResult: [],
+    correctLetters: 0
   });
 
   const onErase = () => {
@@ -56,26 +57,37 @@ function Board(props) {
     };
     const newSubmitResult = Array.from(status.submitResult);
     const curSubmitReuslt = [];
+    let newCorrectLetters = 0;
+
     for (let i = 0; i < status.inputs[status.curTry].length; i++) {
       const curLetter = status.inputs[status.curTry][i];
       let found = false;
 
-      for (let j = 0; j < props.answer.length; j++) {
+      // Get Correct
+      if (curLetter === props.answer[i]) {
+        found = true;
+        newLetterResult[curLetter] = 'Correct';
+        curSubmitReuslt.push('Correct');
+        newCorrectLetters++;
+      }
+
+      // Get Existing
+      for (let j = 0; j < props.answer.length && !found; j++) {
+        if (i === j) {
+          continue;
+        }
+
         if (curLetter === props.answer[j]) {
           found = true;
-          if (i === j) {
-            newLetterResult[curLetter] = 'Correct';
-            curSubmitReuslt.push('Correct');
-          } else {
-            if (newLetterResult[curLetter] === 'Untried') {
-              newLetterResult[curLetter] = 'Existing';
-            }
-            curSubmitReuslt.push('Existing');
+          if (newLetterResult[curLetter] === 'Untried') {
+            newLetterResult[curLetter] = 'Existing';
           }
+          curSubmitReuslt.push('Existing');
           break;
         }
       }
 
+      // Get Never
       if (!found) {
         newLetterResult[curLetter] = 'Never';
         curSubmitReuslt.push('Never');
@@ -87,7 +99,8 @@ function Board(props) {
       ...status,
       letterResult: newLetterResult,
       submitResult: newSubmitResult,
-      curTry: status.curTry + 1
+      curTry: status.curTry + 1,
+      correctLetters: newCorrectLetters
     });
   };
 

@@ -1,14 +1,21 @@
 import './App.css';
 
+import {
+  QUESTION_NUMBER,
+  ANSWER
+} from './contents/WordPicker';
+
 import Title from './components/Title';
 import Board from './components/Board';
 
 function App() {
   return (
     <div className="App">
-      <Title />
+      <Title 
+        questionNumber={QUESTION_NUMBER}
+      />
       <Board
-        answer={'react'}
+        answer={ANSWER}
       />
     </div>
   );

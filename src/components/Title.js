@@ -1,7 +1,12 @@
-function Title() {
+function Title(props) {
+  /*
+    Props of Title
+      - questionNumber: number
+  */
+
   return (
     <header>
-      React Wordle
+      React Wordle { props.questionNumber }
     </header>
   );
 }

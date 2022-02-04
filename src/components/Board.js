@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Line from './Line';
 import TouchInput from './TouchInput';
 import Result from './Result';
+import { isInWordList } from '../contents/WordPicker';
 
 function Board(props) {
   /*
@@ -46,11 +47,18 @@ function Board(props) {
   };
 
   const onSubmit = () => {
-    if (status.curTry >= 6) {
+    if (status.curTry >= 6 || status.correctLetters === 5) {
+      console.log('This game has been already finished. Refresh app to restart.');
       return;
     }
 
     if (status.inputs[status.curTry].length !== 5) {
+      console.log('Not enough letters.');
+      return;
+    }
+
+    if (!isInWordList(status.inputs[status.curTry])) {
+      console.log('Not in word list. Try writing something about programming with 5 letters.');
       return;
     }
 

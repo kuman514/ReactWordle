@@ -8,7 +8,7 @@ function Result(props) {
   */
   
   return (
-    <div className={`Result ${props.gameProcess}`}>
+    <div className={`Result ${(props.gameProcess === 'Playing' ? 'Hidden' : '')}`}>
       <div className="ResultContent">
         Result Content
       </div>

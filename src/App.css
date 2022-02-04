@@ -88,6 +88,10 @@ button:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
+.Hidden {
+  display: none;
+}
+
 .ResultContent {
   padding: 40px;
   border-radius: 20px;

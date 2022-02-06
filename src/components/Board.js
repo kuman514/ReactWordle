@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Line from './Line';
 import TouchInput from './TouchInput';
 import Result from './Result';
+import Alert from './Alert';
 import { isInWordList } from '../contents/WordPicker';
 
 function Board(props) {
@@ -25,7 +26,8 @@ function Board(props) {
       'y': 'Untried', 'z': 'Untried'
     },
     submitResult: [],
-    correctLetters: 0
+    correctLetters: 0,
+    alertMessage: ''
   });
 
   const onErase = () => {
@@ -54,11 +56,19 @@ function Board(props) {
 
     if (status.inputs[status.curTry].length !== 5) {
       console.log('Not enough letters.');
+      setStatus({
+        ...status,
+        alertMessage: 'Not enough letters.'
+      });
       return;
     }
 
     if (!isInWordList(status.inputs[status.curTry])) {
       console.log('Not in word list. Try writing something about programming with 5 letters.');
+      setStatus({
+        ...status,
+        alertMessage: 'Not in word list.'
+      });
       return;
     }
 
@@ -111,7 +121,8 @@ function Board(props) {
       letterResult: newLetterResult,
       submitResult: newSubmitResult,
       curTry: status.curTry + 1,
-      correctLetters: newCorrectLetters
+      correctLetters: newCorrectLetters,
+      alertMessage: ''
     });
   };
 
@@ -135,6 +146,16 @@ function Board(props) {
 
   return (
     <div className="Board">
+      {
+        status.alertMessage === '' ? (
+          null
+        ) : (
+          <Alert
+            message={status.alertMessage}
+          />
+        )
+      }
+
       <div className="Lines">
         {
           [0, 1, 2, 3, 4, 5].map((index) => {

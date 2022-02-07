@@ -27,7 +27,8 @@ function Board(props) {
     },
     submitResult: [],
     correctLetters: 0,
-    alertMessage: ''
+    alertMessage: '',
+    showResult: false
   });
 
   const onErase = () => {
@@ -116,18 +117,23 @@ function Board(props) {
     }
     newSubmitResult.push(curSubmitReuslt);
 
+    const newTry = status.curTry + 1;
+    const newShowResult = (newCorrectLetters === 5) || (newTry >= 6);
+
     setStatus({
       ...status,
       letterResult: newLetterResult,
       submitResult: newSubmitResult,
-      curTry: status.curTry + 1,
+      curTry: newTry,
       correctLetters: newCorrectLetters,
-      alertMessage: ''
+      alertMessage: '',
+      showResult: newShowResult
     });
   };
 
   const onInput = (letter) => {
-    if (status.curTry >= 6) {
+    if (status.curTry >= 6 || status.correctLetters === 5) {
+      console.log('This game has been already finished. Refresh app to restart.');
       return;
     }
 
@@ -141,6 +147,20 @@ function Board(props) {
     setStatus({
       ...status,
       inputs: newInputs
+    });
+  };
+
+  const openResult = () => {
+    setStatus({
+      ...status,
+      showResult: true
+    });
+  };
+
+  const closeResult = () => {
+    setStatus({
+      ...status,
+      showResult: false
     });
   };
 
@@ -195,7 +215,23 @@ function Board(props) {
         tries={status.curTry}
         questionNumber={props.questionNumber}
         submitResult={status.submitResult}
+        showResult={status.showResult}
+        onClickClose={closeResult}
       />
+
+      {
+        (status.curTry >= 6 || status.correctLetters === 5) ? (
+          <button
+            onClick={() => {
+              openResult();
+            }}
+          >
+            Reopen Result
+          </button>
+        ) : (
+          null
+        )
+      }
     </div>
   );
 }

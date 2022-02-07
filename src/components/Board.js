@@ -200,25 +200,31 @@ function Board(props) {
         onSubmit={onSubmit}
       />
 
-      <Result
-        gameProcess={
-          (status.correctLetters === 5) ? (
-            'Complete'
-          ) : (
-            (status.curTry >= 6) ? (
-              'Failed'
-            ) : (
-              'Playing'
-            )
-          )
-        }
-        tries={status.curTry}
-        questionNumber={props.questionNumber}
-        submitResult={status.submitResult}
-        showResult={status.showResult}
-        onClickClose={closeResult}
-      />
-
+      {
+        (status.curTry >= 6 || status.correctLetters === 5) ? (
+          <Result
+            gameProcess={
+              (status.correctLetters === 5) ? (
+                'Complete'
+              ) : (
+                (status.curTry >= 6) ? (
+                  'Failed'
+                ) : (
+                  'Playing'
+                )
+              )
+            }
+            tries={status.curTry}
+            questionNumber={props.questionNumber}
+            submitResults={status.submitResult}
+            showResult={status.showResult}
+            onClickClose={closeResult}
+          />
+        ) : (
+          null
+        )
+      }
+      
       {
         (status.curTry >= 6 || status.correctLetters === 5) ? (
           <button

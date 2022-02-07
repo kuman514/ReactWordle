@@ -15,25 +15,52 @@ function Result(props) {
     >
       <div className="ResultContent">
         <div>
-          Title
+          {
+            (props.gameProcess === 'Complete') ? (
+              'Game Complete!'
+            ) : (
+              (props.gameProcess === 'Failed') ? (
+                'Failed To Guess...'
+              ) : (
+                null
+              )
+            )
+          }
         </div>
 
         <div>
-          Content
+          <div>
+            Tries: {props.tries} / 6
+          </div>
+          <div>
+            {
+              props.submitResults.map((line, index) => {
+                return (
+                  <div key={`ResultLine-${index}`}>
+                    {
+                      line.map((item) => {
+                        switch (item) {
+                          case 'Existing':
+                            return '🟪';
+                          case 'Correct':
+                            return '🟩';
+                          case 'Never':
+                            return '🟥';
+                          default:
+                            return '⬛️';
+                        }
+                      })
+                    }
+                  </div>
+                );
+              })
+            }
+          </div>
         </div>
 
         <div>
           <button>
-            Share
-          </button>
-          <button>
-            Share
-          </button>
-          <button>
-            Share
-          </button>
-          <button>
-            Share
+            Share On Twitter
           </button>
         </div>
 

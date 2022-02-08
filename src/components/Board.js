@@ -216,6 +216,7 @@ function Board(props) {
             }
             tries={status.curTry}
             questionNumber={props.questionNumber}
+            answer={props.answer}
             submitResults={status.submitResult}
             showResult={status.showResult}
             onClickClose={closeResult}

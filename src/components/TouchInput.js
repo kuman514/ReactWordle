@@ -70,7 +70,7 @@ function TouchInput(props) {
             onTouchButton('SUBMIT');
           }}
         >
-          SUBMIT
+          CHECK
         </button>
         {
           thirdInputLine.map((item) => {

@@ -229,6 +229,7 @@ function Board(props) {
       {
         (status.curTry >= 6 || status.correctLetters === 5) ? (
           <button
+            className="ResultButton"
             onClick={() => {
               openResult();
             }}

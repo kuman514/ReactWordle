@@ -93,6 +93,7 @@ function Result(props) {
 
         <div>
           <button
+            className="ResultButton"
             onClick={() => {
               shareOnTwitter();
             }}
@@ -103,6 +104,7 @@ function Result(props) {
 
         <div>
           <button
+            className="ResultButton"
             onClick={() => {
               if (props.onClickClose) {
                 props.onClickClose();

@@ -5,9 +5,38 @@ function Result(props) {
       - showResult: boolean
       - tries: number
       - questionNumber: number
+      - answer: string
       - submitResults: string[][]
       - onClickClose: function (void)
   */
+
+  const shareOnTwitter = () => {
+    let tweet = `https://twitter.com/intent/tweet?url=https%3A//kuman514.github.io/ReactWordle&text=kuman514%27s%20React%20Wordle%20${props.questionNumber}%0A`;
+
+    tweet += `Tries%3A%20${props.tries}%20%2F%206%0A`;
+
+    props.submitResults.forEach((line) => {
+      line.forEach((item) => {
+        switch (item) {
+          case 'Existing':
+            tweet += '🟪';
+            break;
+          case 'Correct':
+            tweet += '🟩';
+            break;
+          case 'Never':
+            tweet += '🟥';
+            break;
+          default:
+            tweet += '⬛️';
+            break;
+        }
+      });
+      tweet += '%0A';
+    });
+
+    window.open(tweet, '_blank');
+  };
   
   return (
     <div
@@ -26,6 +55,10 @@ function Result(props) {
               )
             )
           }
+        </div>
+
+        <div>
+          The answer was {props.answer.toUpperCase()}
         </div>
 
         <div>
@@ -59,7 +92,11 @@ function Result(props) {
         </div>
 
         <div>
-          <button>
+          <button
+            onClick={() => {
+              shareOnTwitter();
+            }}
+          >
             Share On Twitter
           </button>
         </div>

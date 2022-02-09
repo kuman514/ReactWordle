@@ -49,6 +49,13 @@
   grid-template-rows: repeat(3, 1fr);
 }
 
+@media (orientation: portrait) {
+  .TouchInput {
+    width: 90vw;
+    height: 18vh;
+  }
+}
+
 button {
   all: unset;
   width: 9%;

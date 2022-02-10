@@ -21,6 +21,33 @@
   justify-content: center;
 }
 
+.Alert {
+  position: fixed;
+  opacity: 0;
+  width: 80%;
+  top: 25%;
+  pointer-events: none;
+  animation: AlertAnimation linear 2000ms;
+  animation-iteration-count: 1;
+}
+
+@keyframes AlertAnimation {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.AlertContent {
+  background-color: rgba(64, 64, 64, 0.9);
+  padding: 5%;
+}
+
 .Lines {
   width: 40vh;
   height: 48vh;

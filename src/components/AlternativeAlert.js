@@ -1,4 +1,4 @@
-function Alert(props) {
+function AlternativeAlert(props) {
   /*
     Props of Alert
       - message: string
@@ -13,4 +13,4 @@ function Alert(props) {
   );
 }
 
-export default Alert;
+export default AlternativeAlert;

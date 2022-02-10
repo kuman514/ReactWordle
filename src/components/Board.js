@@ -4,6 +4,7 @@ import Line from './Line';
 import TouchInput from './TouchInput';
 import Result from './Result';
 import Alert from './Alert';
+import AlternativeAlert from './AlternativeAlert';
 import { isInWordList } from '../contents/WordPicker';
 
 function Board(props) {
@@ -28,7 +29,8 @@ function Board(props) {
     submitResult: [],
     correctLetters: 0,
     alertMessage: '',
-    showResult: false
+    showResult: false,
+    alternativeAlert: false
   });
 
   const onErase = () => {
@@ -52,6 +54,11 @@ function Board(props) {
   const onSubmit = () => {
     if (status.curTry >= 6 || status.correctLetters === 5) {
       console.log('This game has been already finished. Refresh app to restart.');
+      setStatus({
+        ...status,
+        alertMessage: 'This game has been already finished. Refresh app to restart.',
+        alternativeAlert: !status.alternativeAlert
+      });
       return;
     }
 
@@ -59,16 +66,18 @@ function Board(props) {
       console.log('Not enough letters.');
       setStatus({
         ...status,
-        alertMessage: 'Not enough letters.'
+        alertMessage: 'Not enough letters.',
+        alternativeAlert: !status.alternativeAlert
       });
       return;
     }
 
     if (!isInWordList(status.inputs[status.curTry])) {
-      console.log('Not in word list. Try writing something about programming with 5 letters.');
+      console.log('Not in word list.');
       setStatus({
         ...status,
-        alertMessage: 'Not in word list.'
+        alertMessage: 'Not in word list.',
+        alternativeAlert: !status.alternativeAlert
       });
       return;
     }
@@ -134,6 +143,11 @@ function Board(props) {
   const onInput = (letter) => {
     if (status.curTry >= 6 || status.correctLetters === 5) {
       console.log('This game has been already finished. Refresh app to restart.');
+      setStatus({
+        ...status,
+        alertMessage: 'This game has been already finished. Refresh app to restart.',
+        alternativeAlert: !status.alternativeAlert
+      });
       return;
     }
 
@@ -170,9 +184,15 @@ function Board(props) {
         status.alertMessage === '' ? (
           null
         ) : (
-          <Alert
-            message={status.alertMessage}
-          />
+          status.alternativeAlert ? (
+            <Alert
+              message={status.alertMessage}
+            />
+          ) : (
+            <AlternativeAlert
+              message={status.alertMessage}
+            />
+          )
         )
       }
 

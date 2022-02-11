@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import Title from './Title';
 import Line from './Line';
 import TouchInput from './TouchInput';
 import Result from './Result';
@@ -178,8 +179,37 @@ function Board(props) {
     });
   };
 
+  const keyInput = (keyEvent) => {
+    switch (keyEvent.code) {
+      case 'KeyA': case 'KeyB': case 'KeyC': case 'KeyD': case 'KeyE':
+      case 'KeyF': case 'KeyG': case 'KeyH': case 'KeyI': case 'KeyJ':
+      case 'KeyK': case 'KeyL': case 'KeyM': case 'KeyN': case 'KeyO':
+      case 'KeyP': case 'KeyQ': case 'KeyR': case 'KeyS': case 'KeyT':
+      case 'KeyU': case 'KeyV': case 'KeyW': case 'KeyX': case 'KeyY':
+      case 'KeyZ':
+        onInput(keyEvent.key.toLowerCase());
+        break;
+      case 'Enter':
+        onSubmit();
+        break;
+      case 'Backspace':
+        onErase();
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
-    <div className="Board">
+    <div
+      className="Board"
+      onKeyDown={keyInput}
+      tabIndex="0"
+    >
+      <Title 
+        questionNumber={props.questionNumber}
+      />
+
       {
         status.alertMessage === '' ? (
           null

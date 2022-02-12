@@ -1,6 +1,13 @@
 import { createStore } from 'redux';
 
+import {
+  QUESTION_NUMBER,
+  ANSWER
+} from './contents/WordPicker';
+
 const initState = {
+  questionNumber: QUESTION_NUMBER,
+  answer: ANSWER,
   curTry: 0,
   inputs: ['', '', '', '', '', ''],
   letterResult: {

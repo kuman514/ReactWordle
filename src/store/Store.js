@@ -3,7 +3,7 @@ import { createStore } from 'redux';
 import {
   QUESTION_NUMBER,
   ANSWER
-} from './contents/WordPicker';
+} from '../contents/WordPicker';
 import {
   onInput,
   onErase,
@@ -29,7 +29,7 @@ const initState = {
   submitResult: [],
   correctLetters: 0,
   alertMessage: '',
-  showResult: false,
+  showResult: true,
   alternativeAlert: false
 };
 

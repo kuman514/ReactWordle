@@ -4,6 +4,13 @@ import {
   QUESTION_NUMBER,
   ANSWER
 } from './contents/WordPicker';
+import {
+  onInput,
+  onErase,
+  onSubmit,
+  onOpenResult,
+  onCloseResult
+} from './StoreFunctions';
 
 const initState = {
   questionNumber: QUESTION_NUMBER,
@@ -38,17 +45,18 @@ function onDispatch(state = initState, action) {
     OPENRESULT: { (empty) }
     CLOSERESULT: { (empty) }
   */
+  
   switch (action.type) {
     case 'INPUT':
-      break;
+      return onInput(state, action.payload);
     case 'ERASE':
-      break;
+      return onErase(state);
     case 'SUBMIT':
-      break;
+      return onSubmit(state);
     case 'OPENRESULT':
-      break;
+      return onOpenResult(state);
     case 'CLOSERESULT':
-      break;
+      return onCloseResult(state);
     default:
       return state;
   }

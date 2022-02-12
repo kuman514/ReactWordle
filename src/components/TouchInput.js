@@ -1,31 +1,10 @@
-const firstInputLine = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'];
-const secondInputLine = ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'];
-const thirdInputLine = ['z', 'x', 'c', 'v', 'b', 'n', 'm'];
+import InputButton from './InputButton';
+import SpecialInputButton from './SpecialInputButton';
 
-function TouchInput(props) {
-  /*
-    Props of TouchInput
-      - result: {
-          'a' ~ 'z': 'Untried' | 'Correct' | 'Existing' | 'Never'
-        }
-      - onInput: Function (letter: string)
-      - onErase: Function (void)
-      - onSubmit: Function (void)
-  */
- 
-  const onTouchButton = (buttonName) => {
-    switch (buttonName) {
-      case 'ERASE':
-        props.onErase();
-        break;
-      case 'SUBMIT':
-        props.onSubmit();
-        break;
-      default:
-        props.onInput(buttonName[0]);
-        break;
-    }
-  };
+function TouchInput() {
+  const firstInputLine = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'];
+  const secondInputLine = ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'];
+  const thirdInputLine = ['z', 'x', 'c', 'v', 'b', 'n', 'm'];
 
   return (
     <div className="TouchInput">
@@ -33,15 +12,10 @@ function TouchInput(props) {
         {
           firstInputLine.map((item) => {
             return (
-              <button
+              <InputButton
                 key={`button-${item}`}
-                className={props.result[item]}
-                onClick={() => {
-                  onTouchButton(item);
-                }}
-              >
-                { item }
-              </button>
+                letter={item}
+              />
             );
           })
         }
@@ -50,51 +24,33 @@ function TouchInput(props) {
         {
           secondInputLine.map((item) => {
             return (
-              <button
+              <InputButton
                 key={`button-${item}`}
-                className={props.result[item]}
-                onClick={() => {
-                  onTouchButton(item);
-                }}
-              >
-                { item }
-              </button>
+                letter={item}
+              />
             );
           })
         }
       </div>
       <div className="ThirdInputLine">
-        <button
-          className="BigButton"
-          onClick={() => {
-            onTouchButton('SUBMIT');
-          }}
-        >
-          CHECK
-        </button>
+        <SpecialInputButton
+          onTouchType="SUBMIT"
+          textContent="CHECK"
+        />
         {
           thirdInputLine.map((item) => {
             return (
-              <button
+              <InputButton
                 key={`button-${item}`}
-                className={props.result[item]}
-                onClick={() => {
-                  onTouchButton(item);
-                }}
-              >
-                { item }
-              </button>
+                letter={item}
+              />
             );
           })
         }
-        <button
-          className="BigButton"
-          onClick={() => {
-            onTouchButton('ERASE');
-          }}
-        >
-          ERASE
-        </button>
+        <SpecialInputButton
+          onTouchType="ERASE"
+          textContent="ERASE"
+        />
       </div>
     </div>
   );

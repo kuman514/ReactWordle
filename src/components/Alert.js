@@ -1,13 +1,20 @@
-function Alert(props) {
+import { useSelector } from 'react-redux';
+
+function Alert() {
   /*
-    Props of Alert
-      - message: string
+    State of Alert
+      - message: string from store -> alertMessage
   */
+
+  const messageSelector = (state) => {
+    return state.alertMessage;
+  };
+  const message = useSelector(messageSelector);
 
   return (
     <div className="Alert">
       <div className="AlertContent">
-        { props.message }
+        { message }
       </div>
     </div>
   );

@@ -1,12 +1,19 @@
-function Title(props) {
+import { useSelector } from 'react-redux';
+
+function Title() {
   /*
-    Props of Title
-      - questionNumber: number
+    State of Title
+      - questionNumber: number from store -> questionNumber
   */
+
+  const questionNumberSelector = (state) => {
+    return state.questionNumber;
+  };
+  const questionNumber = useSelector(questionNumberSelector);
 
   return (
     <header>
-      React Wordle { props.questionNumber }
+      React Wordle { questionNumber }
     </header>
   );
 }

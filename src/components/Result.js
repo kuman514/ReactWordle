@@ -3,7 +3,7 @@ import {
   useDispatch
 } from 'react-redux';
 
-function Result(props) {
+function Result() {
   /*
     State of Result
       - show: boolean from store -> showResult

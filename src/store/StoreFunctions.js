@@ -1,4 +1,8 @@
-import { isInWordList } from '../contents/WordPicker';
+import {
+  isInWordList,
+  pickRandomWord,
+  selectWord
+} from '../contents/WordPicker';
 
 export function onInput(state, payload) {
   if (state.curTry >= 6 || state.correctLetters === 5) {
@@ -139,4 +143,56 @@ export function onCloseResult(state) {
     ...state,
     showResult: false
   };
+}
+
+export function onRandomReset(state) {
+  const [questionNumber, answer] = pickRandomWord();
+
+  return {
+    ...state,
+    questionNumber: questionNumber,
+    answer: answer,
+    curTry: 0,
+    inputs: ['', '', '', '', '', ''],
+    letterResult: {
+      'a': 'Untried', 'b': 'Untried', 'c': 'Untried', 'd': 'Untried',
+      'e': 'Untried', 'f': 'Untried', 'g': 'Untried', 'h': 'Untried',
+      'i': 'Untried', 'j': 'Untried', 'k': 'Untried', 'l': 'Untried',
+      'm': 'Untried', 'n': 'Untried', 'o': 'Untried', 'p': 'Untried',
+      'q': 'Untried', 'r': 'Untried', 's': 'Untried', 't': 'Untried',
+      'u': 'Untried', 'v': 'Untried', 'w': 'Untried', 'x': 'Untried',
+      'y': 'Untried', 'z': 'Untried'
+    },
+    submitResult: [],
+    correctLetters: 0,
+    alertMessage: '',
+    showResult: true,
+    alternativeAlert: false
+  }
+}
+
+export function onSelectReset(state, payload) {
+  const [questionNumber, answer] = selectWord(payload.index - 1);
+
+  return {
+    ...state,
+    questionNumber: questionNumber,
+    answer: answer,
+    curTry: 0,
+    inputs: ['', '', '', '', '', ''],
+    letterResult: {
+      'a': 'Untried', 'b': 'Untried', 'c': 'Untried', 'd': 'Untried',
+      'e': 'Untried', 'f': 'Untried', 'g': 'Untried', 'h': 'Untried',
+      'i': 'Untried', 'j': 'Untried', 'k': 'Untried', 'l': 'Untried',
+      'm': 'Untried', 'n': 'Untried', 'o': 'Untried', 'p': 'Untried',
+      'q': 'Untried', 'r': 'Untried', 's': 'Untried', 't': 'Untried',
+      'u': 'Untried', 'v': 'Untried', 'w': 'Untried', 'x': 'Untried',
+      'y': 'Untried', 'z': 'Untried'
+    },
+    submitResult: [],
+    correctLetters: 0,
+    alertMessage: '',
+    showResult: true,
+    alternativeAlert: false
+  }
 }

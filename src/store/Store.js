@@ -9,7 +9,9 @@ import {
   onErase,
   onSubmit,
   onOpenResult,
-  onCloseResult
+  onCloseResult,
+  onRandomReset,
+  onSelectReset
 } from './StoreFunctions';
 
 const initState = {
@@ -44,6 +46,10 @@ function onDispatch(state = initState, action) {
     SUBMIT: { (empty) }
     OPENRESULT: { (empty) }
     CLOSERESULT: { (empty) }
+    RANDOMRESET: { (empty) }
+    SELECTRESET: {
+      index: number (realIndex + 1)
+    }
   */
   
   switch (action.type) {
@@ -57,6 +63,10 @@ function onDispatch(state = initState, action) {
       return onOpenResult(state);
     case 'CLOSERESULT':
       return onCloseResult(state);
+    case 'RANDOMRESET':
+      return onRandomReset(state);
+    case 'SELECTRESET':
+      return onSelectReset(state, action);
     default:
       return state;
   }

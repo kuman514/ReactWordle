@@ -1,6 +1,6 @@
 import wordList from './WordList.json';
 
-function pickWord() {
+export function pickRandomWord() {
   const randomIndex = Math.floor(Math.random() * wordList.length);
   const pickedAnswer = wordList[randomIndex];
   const randomNumber = randomIndex + 1;
@@ -8,7 +8,15 @@ function pickWord() {
   return [randomNumber, pickedAnswer];
 }
 
-const [questionNumber, answer] = pickWord();
+export function selectWord(index) {
+  if (index < 0 || index >= wordList.length) {
+    return pickRandomWord();
+  } else {
+    return [index, wordList[index]];
+  }
+}
+
+const [questionNumber, answer] = pickRandomWord();
 
 export const QUESTION_NUMBER = questionNumber;
 export const ANSWER = answer;

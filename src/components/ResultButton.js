@@ -18,16 +18,28 @@ function ResultButton() {
 
   if (complete) {
     return (
-      <button
-        className="ResultButton"
-        onClick={() => {
-          dispatch({
-            type: 'OPENRESULT'
-          });
-        }}
-      >
-        Reopen Result
-      </button>
+      <div className="ResultButtonSets">
+        <button
+          className="ResultButton"
+          onClick={() => {
+            dispatch({
+              type: 'OPENRESULT'
+            });
+          }}
+        >
+          Reopen Result
+        </button>
+        <button
+          className="ResultButton"
+          onClick={() => {
+            dispatch({
+              type: 'RANDOMRESET'
+            });
+          }}
+        >
+          Random Reset
+        </button>
+      </div>
     );
   } else {
     return null;

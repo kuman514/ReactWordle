@@ -127,9 +127,16 @@ button:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
+.ResultButtonSets {
+  margin-left: 4px;
+  margin-right: 4px;
+}
+
 .ResultButton {
   width: unset;
   height: fit-content;
+  margin-left: 1vw;
+  margin-right: 1vw;
 }
 
 .Hidden {

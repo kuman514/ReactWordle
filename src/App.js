@@ -10,7 +10,7 @@ import ResultButton from './components/ResultButton';
 import Result from './components/Result';
 
 // Initialize keydown event
-document.removeEventListener('keydown');
+//document.removeEventListener();
 document.addEventListener('keydown', (event) => {
   switch (event.code) {
     case 'KeyA': case 'KeyB': case 'KeyC': case 'KeyD': case 'KeyE':

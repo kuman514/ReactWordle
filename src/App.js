@@ -9,6 +9,8 @@ import TouchInput from './components/TouchInput';
 import ResultButton from './components/ResultButton';
 import Result from './components/Result';
 
+// Initialize keydown event
+document.removeEventListener('keydown');
 document.addEventListener('keydown', (event) => {
   switch (event.code) {
     case 'KeyA': case 'KeyB': case 'KeyC': case 'KeyD': case 'KeyE':
@@ -25,9 +27,11 @@ document.addEventListener('keydown', (event) => {
       });
       break;
     case 'Enter':
-      store.dispatch({
-        type: 'SUBMIT'
-      });
+      if (document.activeElement.nodeName !== 'BUTTON') {
+        store.dispatch({
+          type: 'SUBMIT'
+        });
+      }
       break;
     case 'Backspace':
       store.dispatch({

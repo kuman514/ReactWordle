@@ -148,3 +148,8 @@ button:hover {
   border-radius: 20px;
   background-color: #282c34;
 }
+
+button:focus {
+  border: solid 3px white;
+	box-sizing: border-box;
+}

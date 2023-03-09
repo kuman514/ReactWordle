@@ -18,7 +18,7 @@
 
 # Objectives (과제)
 - TypeScript 적용 (js파일을 ts로 변환하는 것 포함) (추후 개발과 유지보수에 있을 타입 에러를 예방하기 위함)
-- Create React App을 탈피하여 Yarn Berry + Vite 적용 (전체적인 프로젝트 성능 향상 목적)
+- ~~Create React App을 탈피하여 Yarn Berry + Vite 적용~~ (전체적인 프로젝트 성능 향상 목적) `완료`
 - Redux를 제거하고 Zustand를 적용 (유지보수에 필요한 스토어의 최소 변경 횟수를 줄이기 위함)
 - 단어 데이터 백엔드로 이관시키기
 - 코드 리팩토링

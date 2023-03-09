@@ -1,5 +1,5 @@
 # ReactWordle
-[Wordle 게임](https://www.powerlanguage.co.uk/wordle/)을 직접 구현해본 앱.   
+[Wordle 게임](https://www.powerlanguage.co.uk/wordle/)을 직접 구현해본 앱.
 ([앱 사용해보기](https://kuman514.github.io/ReactWordle))
 
 # Objective (목적)
@@ -15,6 +15,13 @@
 - 입력(알파벳 입력, 제출 등등)에 따라 상태가 빈번하게 바뀜.
 - 한 번만 적용해야 됐을 키보드 입력 처리(`document.addEventListener`의 `keydown`)가 상태가 변할 때마다 반복적으로 적용되는 오류 발생.
 - 이에 따라, 상태를 관리할 수 있는 단 하나의 근원이 요구됨에 따라, `Redux`를 적용하게 되었음.
+
+# Objectives (과제)
+- TypeScript 적용 (js파일을 ts로 변환하는 것 포함) (추후 개발과 유지보수에 있을 타입 에러를 예방하기 위함)
+- Create React App을 탈피하여 Yarn Berry + Vite 적용 (전체적인 프로젝트 성능 향상 목적)
+- Redux를 제거하고 Zustand를 적용 (유지보수에 필요한 스토어의 최소 변경 횟수를 줄이기 위함)
+- 단어 데이터 백엔드로 이관시키기
+- 코드 리팩토링
 
 # Updated (업데이트)
 - 02-09-2022: 최초 릴리즈

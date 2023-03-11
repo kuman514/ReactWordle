@@ -1,4 +1,4 @@
-import { createStore } from 'zustand';
+import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 
 import { AppAction, AppState } from '^/types';
@@ -13,7 +13,7 @@ import {
   onSubmit,
 } from './functions';
 
-const useStore = createStore<AppState & AppAction>()(
+const useAppStore = create<AppState & AppAction>()(
   devtools(
     persist(
       (set) => ({
@@ -33,4 +33,4 @@ const useStore = createStore<AppState & AppAction>()(
   ),
 );
 
-export default useStore;
+export default useAppStore;

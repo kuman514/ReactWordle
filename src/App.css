@@ -98,19 +98,19 @@ button:hover {
   cursor: pointer;
 }
 
-.Untried {
+.untried {
   background-color: #282c34;
 }
 
-.Correct {
+.correct {
   background-color: #26b126;
 }
 
-.Existing {
+.existing {
   background-color: #a70e9a;
 }
 
-.Never {
+.never {
   background-color: red;
 }
 

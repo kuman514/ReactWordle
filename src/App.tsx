@@ -1,6 +1,5 @@
+import React from 'react';
 import './App.css';
-
-import { store } from './store/Store';
 
 import Board from './components/Board';
 import Title from './components/Title';
@@ -8,9 +7,10 @@ import AlertIndicator from './components/AlertIndicator';
 import TouchInput from './components/TouchInput';
 import ResultButton from './components/ResultButton';
 import Result from './components/Result';
+import useAppStore from './store';
+import { Alphabet } from './types';
 
 // Initialize keydown event
-//document.removeEventListener();
 document.addEventListener('keydown', (event) => {
   switch (event.code) {
     case 'KeyA': case 'KeyB': case 'KeyC': case 'KeyD': case 'KeyE':
@@ -19,24 +19,15 @@ document.addEventListener('keydown', (event) => {
     case 'KeyP': case 'KeyQ': case 'KeyR': case 'KeyS': case 'KeyT':
     case 'KeyU': case 'KeyV': case 'KeyW': case 'KeyX': case 'KeyY':
     case 'KeyZ':
-      store.dispatch({
-        type: 'INPUT',
-        payload: {
-          letter: event.key.toLowerCase()
-        }
-      });
+      useAppStore.getState().input(event.key.toLowerCase() as Alphabet);
       break;
     case 'Enter':
-      if (document.activeElement.nodeName !== 'BUTTON') {
-        store.dispatch({
-          type: 'SUBMIT'
-        });
+      if (document.activeElement?.nodeName !== 'BUTTON') {
+        useAppStore.getState().submit();
       }
       break;
     case 'Backspace':
-      store.dispatch({
-        type: 'ERASE'
-      });
+      useAppStore.getState().erase();
       break;
     default:
       break;

@@ -12,6 +12,17 @@ export type Alphabet =
   'p' | 'q' | 'r' | 's' | 't' |
   'u' | 'v' | 'w' | 'x' | 'y' | 'z';
 
+export enum GameResult {
+  PLAYING = 'playing',
+  COMPLETE = 'complete',
+  FAILED = 'failed',
+}
+
+export enum SpecialInputType {
+  SUBMIT = 'submit',
+  ERASE = 'erase',
+}
+
 export interface AppState {
   questionNumber: number;
   answer: string;

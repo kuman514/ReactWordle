@@ -56,9 +56,7 @@ function Result() {
 
   if (compelted && showResult) {
     return (
-      <div
-        className={`Result ${processResult}`}
-      >
+      <div className={`Result ${processResult}`}>
         <div className="ResultContent">
           <div>
             {

@@ -11,12 +11,10 @@ function Tile({ lineNo, colNo }: Props) {
   const { inputs, curTry, submitResult } = useAppStore();
 
   const inputLetter = inputs[lineNo][colNo] ?? '';
-  const thisSubmitResult = lineNo < curTry ? submitResult[lineNo][colNo] : '';
+  const thisSubmitResult = (lineNo < curTry) ? submitResult[lineNo][colNo] : '';
 
   return (
-    <span
-      className={`Tile ${thisSubmitResult}`}
-    >
+    <span className={`Tile ${thisSubmitResult}`}>
       { inputLetter }
     </span>
   );

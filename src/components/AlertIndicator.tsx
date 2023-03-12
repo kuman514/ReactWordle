@@ -6,19 +6,15 @@ import AlternativeAlert from '^/components/AlternativeAlert';
 
 function AlertIndicator() {
   const { alertMessage, alternativeAlert } = useAppStore();
-  const showAlert = alertMessage !== '';
+  const showAlert = (alertMessage !== '');
 
   if (!showAlert) {
     return null;
   }
 
-  if (alternativeAlert) {
-    return (
-      <AlternativeAlert />
-    );
-  }
-
-  return (
+  return alternativeAlert ? (
+    <AlternativeAlert />
+  ) : (
     <Alert />
   );
 }

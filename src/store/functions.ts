@@ -91,8 +91,12 @@ export function onInput(state: AppState, letter: Alphabet): AppState {
 }
 
 export function onErase(state: AppState): AppState {
-  if (state.curTry >= 6) {
-    return state;
+  if (state.curTry >= 6 || state.correctLetters === 5) {
+    return {
+      ...state,
+      alertMessage: 'This game has been already finished. Refresh app to restart.',
+      alternativeAlert: !state.alternativeAlert,
+    };
   }
 
   if (state.inputs[state.curTry].length <= 0) {

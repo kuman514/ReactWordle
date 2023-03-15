@@ -1,5 +1,6 @@
 import { Alphabet, AppState, TryResult } from '^/types';
-import wordList from '^/contents/WordList';
+import wordList from '^/contents/wordList';
+import text from '^/contents/text';
 
 export function pickRandomWord() {
   const randomIndex = Math.floor(Math.random() * wordList.length);
@@ -72,7 +73,7 @@ export function onInput(state: AppState, letter: Alphabet): AppState {
   if (state.curTry >= 6 || state.correctLetters === 5) {
     return {
       ...state,
-      alertMessage: 'This game has been already finished. Refresh app to restart.',
+      alertMessage: text.alreadyFinished,
       alternativeAlert: !state.alternativeAlert,
     };
   }
@@ -94,7 +95,7 @@ export function onErase(state: AppState): AppState {
   if (state.curTry >= 6 || state.correctLetters === 5) {
     return {
       ...state,
-      alertMessage: 'This game has been already finished. Refresh app to restart.',
+      alertMessage: text.alreadyFinished,
       alternativeAlert: !state.alternativeAlert,
     };
   }
@@ -116,7 +117,7 @@ export function onSubmit(state: AppState): AppState {
   if (state.curTry >= 6 || state.correctLetters === 5) {
     return {
       ...state,
-      alertMessage: 'This game has been already finished. Refresh app to restart.',
+      alertMessage: text.alreadyFinished,
       alternativeAlert: !state.alternativeAlert,
     };
   }
@@ -124,7 +125,7 @@ export function onSubmit(state: AppState): AppState {
   if (state.inputs[state.curTry].length !== 5) {
     return {
       ...state,
-      alertMessage: 'Not enough letters.',
+      alertMessage: text.shortLength,
       alternativeAlert: !state.alternativeAlert,
     };
   }
@@ -132,7 +133,7 @@ export function onSubmit(state: AppState): AppState {
   if (!isInWordList(state.inputs[state.curTry])) {
     return {
       ...state,
-      alertMessage: 'Not in word list.',
+      alertMessage: text.invalid,
       alternativeAlert: !state.alternativeAlert,
     };
   }

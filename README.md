@@ -1,6 +1,6 @@
 # ReactWordle
 [Wordle 게임](https://www.powerlanguage.co.uk/wordle/)을 직접 구현해본 앱.
-([앱 사용해보기](https://kuman514.github.io/ReactWordle))
+([앱 사용해보기](https://react-wordle-kuman514.vercel.app/))
 
 # Objective (목적)
 - [현행 Wordle 게임](https://www.powerlanguage.co.uk/wordle/)은 다시 플레이하려면 최장 24시간을 기다려야만 합니다. 하지만, 저는 Wordle 게임을 하루에 여러 판 플레이해보고 싶었습니다.

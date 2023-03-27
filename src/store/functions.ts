@@ -1,8 +1,7 @@
 import { Alphabet, AppState, TryResult } from '^/types';
-import wordList from '^/contents/wordList';
 import text from '^/contents/text';
 
-export function pickRandomWord() {
+export function pickRandomWord(wordList: string[]) {
   const randomIndex = Math.floor(Math.random() * wordList.length);
   const pickedAnswer = wordList[randomIndex];
   const randomNumber = randomIndex + 1;
@@ -13,9 +12,9 @@ export function pickRandomWord() {
   };
 }
 
-export function selectWord(index: number) {
+export function selectWord(wordList: string[], index: number) {
   if (index < 0 || index >= wordList.length) {
-    return pickRandomWord();
+    return pickRandomWord(wordList);
   }
   return {
     questionNumber: index + 1,
@@ -23,14 +22,12 @@ export function selectWord(index: number) {
   };
 }
 
-const wordListSet = new Set(wordList);
-export function isInWordList(word: string) {
-  return wordListSet.has(word);
+export function isInWordList(wordContainer: Set<string>, word: string) {
+  return wordContainer.has(word);
 }
 
-export function getInitState(wordId?: number): AppState {
+export function getInitGameState() {
   return {
-    ...(wordId ? selectWord(wordId - 1) : pickRandomWord()),
     curTry: 0,
     inputs: ['', '', '', '', '', ''],
     letterResult: {
@@ -69,7 +66,37 @@ export function getInitState(wordId?: number): AppState {
   };
 }
 
+export function getInitState(state: AppState, wordId?: number): AppState {
+  const {
+    questionNumber,
+    answer,
+  } = (() => {
+    if (!state.wordList) {
+      return {
+        questionNumber: -1,
+        answer: 'Not Loaded',
+      };
+    }
+    return (wordId ? selectWord(state.wordList, wordId - 1) : pickRandomWord(state.wordList));
+  })();
+
+  return {
+    ...state,
+    questionNumber,
+    answer,
+    ...getInitGameState(),
+  };
+}
+
 export function onInput(state: AppState, letter: Alphabet): AppState {
+  if (!state.wordList || !state.wordContainer) {
+    return {
+      ...state,
+      alertMessage: text.notLoaded,
+      alternativeAlert: !state.alternativeAlert,
+    };
+  }
+
   if (state.curTry >= 6 || state.correctLetters === 5) {
     return {
       ...state,
@@ -92,6 +119,14 @@ export function onInput(state: AppState, letter: Alphabet): AppState {
 }
 
 export function onErase(state: AppState): AppState {
+  if (!state.wordList || !state.wordContainer) {
+    return {
+      ...state,
+      alertMessage: text.notLoaded,
+      alternativeAlert: !state.alternativeAlert,
+    };
+  }
+
   if (state.curTry >= 6 || state.correctLetters === 5) {
     return {
       ...state,
@@ -114,6 +149,14 @@ export function onErase(state: AppState): AppState {
 }
 
 export function onSubmit(state: AppState): AppState {
+  if (!state.wordList || !state.wordContainer) {
+    return {
+      ...state,
+      alertMessage: text.notLoaded,
+      alternativeAlert: !state.alternativeAlert,
+    };
+  }
+
   if (state.curTry >= 6 || state.correctLetters === 5) {
     return {
       ...state,
@@ -130,7 +173,7 @@ export function onSubmit(state: AppState): AppState {
     };
   }
 
-  if (!isInWordList(state.inputs[state.curTry])) {
+  if (!isInWordList(state.wordContainer, state.inputs[state.curTry])) {
     return {
       ...state,
       alertMessage: text.invalid,
@@ -213,13 +256,21 @@ export function onCloseResult(state: AppState): AppState {
 export function onRandomReset(state: AppState): AppState {
   return {
     ...state,
-    ...getInitState(),
+    ...getInitState(state),
   };
 }
 
 export function onSelectReset(state: AppState, wordId: number): AppState {
   return {
     ...state,
-    ...getInitState(wordId),
+    ...getInitState(state, wordId),
+  };
+}
+
+export function onLoadWordList(state: AppState, wordList: string[]): AppState {
+  return {
+    ...state,
+    wordList,
+    wordContainer: new Set(wordList),
   };
 }

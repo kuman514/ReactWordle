@@ -3,10 +3,11 @@ import { devtools, persist } from 'zustand/middleware';
 
 import { AppAction, AppState } from '^/types';
 import {
-  getInitState,
+  getInitGameState,
   onCloseResult,
   onErase,
   onInput,
+  onLoadWordList,
   onOpenResult,
   onRandomReset,
   onSelectReset,
@@ -17,7 +18,10 @@ const useAppStore = create<AppState & AppAction>()(
   devtools(
     persist(
       (set) => ({
-        ...getInitState(),
+        questionNumber: -1,
+        answer: 'Not Loaded',
+        ...getInitGameState(),
+        loadWordList: (wordList) => set((state) => onLoadWordList(state, wordList)),
         input: (letter) => set((state) => onInput(state, letter)),
         erase: () => set((state) => onErase(state)),
         submit: () => set((state) => onSubmit(state)),

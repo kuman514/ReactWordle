@@ -22,8 +22,8 @@ export function selectWord(wordList: string[], index: number) {
   };
 }
 
-export function isInWordList(wordContainer: Set<string>, word: string) {
-  return wordContainer.has(word);
+export function isInWordList(wordContainer: Record<string, true>, word: string) {
+  return wordContainer[word];
 }
 
 export function getInitGameState() {
@@ -268,9 +268,13 @@ export function onSelectReset(state: AppState, wordId: number): AppState {
 }
 
 export function onLoadWordList(state: AppState, wordList: string[]): AppState {
+  const wordContainer: Record<string, true> = {};
+  wordList.forEach((word) => {
+    wordContainer[word] = true;
+  });
   return {
     ...state,
     wordList,
-    wordContainer: new Set(wordList),
+    wordContainer,
   };
 }

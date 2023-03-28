@@ -25,7 +25,7 @@ export enum SpecialInputType {
 
 export interface AppState {
   wordList?: string[];
-  wordContainer?: Set<string>;
+  wordContainer?: Record<string, true>;
   questionNumber: number;
   answer: string;
   curTry: number;

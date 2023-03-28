@@ -8,6 +8,7 @@ import AlertIndicator from '^/components/AlertIndicator';
 import TouchInput from '^/components/TouchInput';
 import ResultButton from '^/components/ResultButton';
 import Result from '^/components/Result';
+import LoadingScreen from '^/components/LoadingScreen';
 import useAppStore from '^/store';
 import { Alphabet, AxiosGetWordleWordListResponse } from '^/types';
 
@@ -62,14 +63,22 @@ function App() {
     };
   }, []);
 
-  return (
-    <div className="App">
+  const display = wordList ? (
+    <>
       <Title />
       <AlertIndicator />
       <Board />
       <TouchInput />
       <ResultButton />
       <Result />
+    </>
+  ) : (
+    <LoadingScreen />
+  );
+
+  return (
+    <div className="App">
+      {display}
     </div>
   );
 }

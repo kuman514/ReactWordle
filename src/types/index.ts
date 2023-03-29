@@ -24,6 +24,8 @@ export enum SpecialInputType {
 }
 
 export interface AppState {
+  wordList?: string[];
+  wordContainer?: Record<string, true>;
   questionNumber: number;
   answer: string;
   curTry: number;
@@ -39,6 +41,7 @@ export interface AppState {
 }
 
 export interface AppAction {
+  loadWordList(wordList: string[]): void;
   input(letter: Alphabet): void;
   erase(): void;
   submit(): void;
@@ -46,4 +49,8 @@ export interface AppAction {
   closeResult(): void;
   randomReset(): void;
   selectReset(wordId: number): void;
+}
+
+export interface AxiosGetWordleWordListResponse {
+  data: string[];
 }

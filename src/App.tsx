@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import axios from 'axios';
 import '^/App.css';
 
 import Board from '^/components/Board';
@@ -7,8 +8,9 @@ import AlertIndicator from '^/components/AlertIndicator';
 import TouchInput from '^/components/TouchInput';
 import ResultButton from '^/components/ResultButton';
 import Result from '^/components/Result';
+import LoadingScreen from '^/components/LoadingScreen';
 import useAppStore from '^/store';
-import { Alphabet } from '^/types';
+import { Alphabet, AxiosGetWordleWordListResponse } from '^/types';
 
 // Initialize keydown event
 function handleOnKeyDown(event: KeyboardEvent) {
@@ -33,6 +35,26 @@ function handleOnKeyDown(event: KeyboardEvent) {
 }
 
 function App() {
+  const { wordList, loadWordList, randomReset } = useAppStore();
+  useEffect(() => {
+    if (!wordList) {
+      (async () => {
+        try {
+          const response = await axios.get<AxiosGetWordleWordListResponse>('https://read-only-api-endpoints-kuman514.vercel.app/react-wordle/word-list');
+          if (response.status === 200) {
+            loadWordList(response.data.data);
+            randomReset();
+          }
+        } catch (e) {
+          if (axios.isAxiosError(e)) {
+            // eslint-disable-next-line no-console
+            console.error(e);
+          }
+        }
+      })();
+    }
+  }, [wordList]);
+
   useEffect(() => {
     document.addEventListener('keydown', handleOnKeyDown);
 
@@ -41,14 +63,22 @@ function App() {
     };
   }, []);
 
-  return (
-    <div className="App">
+  const display = wordList ? (
+    <>
       <Title />
       <AlertIndicator />
       <Board />
       <TouchInput />
       <ResultButton />
       <Result />
+    </>
+  ) : (
+    <LoadingScreen />
+  );
+
+  return (
+    <div className="App">
+      {display}
     </div>
   );
 }

@@ -4,10 +4,10 @@
 
 # Objective (목적)
 - [현행 Wordle 게임](https://www.powerlanguage.co.uk/wordle/)은 다시 플레이하려면 최장 24시간을 기다려야만 합니다. 하지만, 저는 Wordle 게임을 하루에 여러 판 플레이해보고 싶었습니다.
-- 그래서 수천 개의 단어를 자료로 하여, 한 단어를 무작위로 뽑아 플레이하며, 새로고침으로 빠르게 재시작할 수 있는 Wordle 게임을 만들게 되었습니다.
+- 그래서 수천 개의 단어를 자료로 하여, 한 단어를 무작위로 뽑아 플레이하며, 기다리지 않고 재시작할 수 있는 Wordle 게임을 만들게 되었습니다.
 
 # Sources (자료 출처)
-- Five Letter Words
+- Five Letter Words ([ReadOnlyAPIEndpoints](https://github.com/kuman514/ReadOnlyAPIEndpoints)로 이관)
   - [https://www-cs-faculty.stanford.edu/~knuth/sgb-words.txt](https://www-cs-faculty.stanford.edu/~knuth/sgb-words.txt)
 
 # Why I applied Redux (Redux를 적용한 이유)
@@ -15,13 +15,14 @@
 - 입력(알파벳 입력, 제출 등등)에 따라 상태가 빈번하게 바뀜.
 - 한 번만 적용해야 됐을 키보드 입력 처리(`document.addEventListener`의 `keydown`)가 상태가 변할 때마다 반복적으로 적용되는 오류 발생.
 - 이에 따라, 상태를 관리할 수 있는 단 하나의 근원이 요구됨에 따라, `Redux`를 적용하게 되었음.
+- 현재, Redux 대신 Zustand를 적용 중. ([다른 프로젝트에서의 이유와 동일](https://github.com/kuman514/ReactGomoku/blob/main/docs/WHY_zustand.md))
 
 # Objectives (과제)
 - TypeScript 적용 (js파일을 ts로 변환하는 것 포함) (추후 개발과 유지보수에 있을 타입 에러를 예방하기 위함)
 - ~~Create React App을 탈피하여 Yarn Berry + Vite 적용~~ (전체적인 프로젝트 성능 향상 목적) `완료`
 - ~~Redux를 제거하고 Zustand를 적용~~ (유지보수에 필요한 스토어의 최소 변경 횟수를 줄이기 위함) `완료`
-- 단어 데이터 백엔드로 이관시키기
-- 코드 리팩토링
+- ~~단어 데이터 백엔드로 이관시키기~~ (Axios를 통해 외부로부터 자료를 받아오려는 것을 시도하기 위함) `완료`
+- 코드 리팩토링 `상시 진행`
 
 # Updated (업데이트)
 - Feb-09-2022: 최초 릴리즈
@@ -36,6 +37,8 @@
 - Feb-16-2022 (3): 앱이 실행되지 않는 문제 해결
 - Mar-10-2023: Yarn Berry와 Vite 적용
 - Mar-12-2023: TypeScript와 Zustand 적용
+- Mar-30-2023: 새로고침 후에도 게임 상태 보존하게 만듦
+- Mar-30-2023 (2): Axios를 통해 단어 목록을 내려받도록 앱 구조 변경
 
 # Issues (오류)
 - Feb-09-2022: ~~모바일 화면에서 입력판이 제대로 표시되지 않는 문제~~(해결됨)

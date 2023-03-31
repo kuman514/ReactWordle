@@ -24,6 +24,9 @@
 - ~~단어 데이터 백엔드로 이관시키기~~ (Axios를 통해 외부로부터 자료를 받아오려는 것을 시도하기 위함) `완료`
 - 코드 리팩토링 `상시 진행`
 
+# Tech Docs (기술적 문서)
+- [Axios를 Fetch API 대신 적용한 이유](https://github.com/kuman514/ReactWordle/blob/main/docs/WHY_axios.md)
+
 # Updated (업데이트)
 - Feb-09-2022: 최초 릴리즈
 - Feb-09-2022 (2): 모바일 화면에서 입력판이 제대로 표시되지 않는 문제 해결

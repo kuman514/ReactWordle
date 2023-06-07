@@ -27,7 +27,7 @@ function Result() {
   };
 
   const shareOnTwitter = () => {
-    let tweet = `https://twitter.com/intent/tweet?url=https%3A//kuman514.github.io/ReactWordle&text=kuman514%27s%20React%20Wordle%20${resultInformation.questionNumber}%0A`;
+    let tweet = `https://twitter.com/intent/tweet?url=https%3A//react-wordle-kuman514.vercel.app/&text=kuman514%27s%20React%20Wordle%20${resultInformation.questionNumber}%0A`;
 
     tweet += `Tries%3A%20${curTry}%20%2F%206${processResult === GameResult.FAILED ? '%20(Failed)' : ''}%0A`;
 

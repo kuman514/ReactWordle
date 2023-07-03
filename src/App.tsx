@@ -40,7 +40,9 @@ function App() {
     if (!wordList) {
       (async () => {
         try {
-          const response = await axios.get<AxiosGetWordleWordListResponse>('https://read-only-api-endpoints-kuman514.vercel.app/react-wordle/word-list');
+          const response = await axios.get<AxiosGetWordleWordListResponse>(
+            import.meta.env.VITE_GET_WORDS_ENDPOINT,
+          );
           if (response.status === 200) {
             loadWordList(response.data.data);
             randomReset();

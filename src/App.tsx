@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import '^/App.css';
 
 import Board from '^/components/Board';
@@ -9,8 +8,11 @@ import TouchInput from '^/components/TouchInput';
 import ResultButton from '^/components/ResultButton';
 import Result from '^/components/Result';
 import LoadingScreen from '^/components/LoadingScreen';
+
 import useAppStore from '^/store';
-import { Alphabet, AxiosGetWordleWordListResponse } from '^/types';
+import { Alphabet } from '^/types';
+import { useLoadWordList } from '^/hooks/useLoadWordList';
+import { useGlobalKeyDown } from '^/hooks/useGlobalKeyDown';
 
 // Initialize keydown event
 function handleOnKeyDown(event: KeyboardEvent) {
@@ -35,35 +37,23 @@ function handleOnKeyDown(event: KeyboardEvent) {
 }
 
 function App() {
+  const [, setIsError] = useState<boolean>(false);
   const { wordList, loadWordList, randomReset } = useAppStore();
-  useEffect(() => {
-    if (!wordList) {
-      (async () => {
-        try {
-          const response = await axios.get<AxiosGetWordleWordListResponse>(
-            import.meta.env.VITE_GET_WORDS_ENDPOINT,
-          );
-          if (response.status === 200) {
-            loadWordList(response.data.data);
-            randomReset();
-          }
-        } catch (e) {
-          if (axios.isAxiosError(e)) {
-            // eslint-disable-next-line no-console
-            console.error(e);
-          }
-        }
-      })();
-    }
-  }, [wordList]);
 
-  useEffect(() => {
-    document.addEventListener('keydown', handleOnKeyDown);
+  useLoadWordList({
+    wordList,
+    onSuccess: (recievedWordList) => {
+      loadWordList(recievedWordList);
+      randomReset();
+    },
+    onError: (error) => {
+      // eslint-disable-next-line no-console
+      console.error(error);
+      setIsError(true);
+    },
+  });
 
-    return () => {
-      document.removeEventListener('keydown', handleOnKeyDown);
-    };
-  }, []);
+  useGlobalKeyDown({ handleOnKeyDown });
 
   const display = wordList ? (
     <>

@@ -8,6 +8,7 @@ import TouchInput from '^/components/TouchInput';
 import ResultButton from '^/components/ResultButton';
 import Result from '^/components/Result';
 import LoadingScreen from '^/components/LoadingScreen';
+import ErrorScreen from '^/components/ErrorScreen';
 
 import useAppStore from '^/store';
 import { Alphabet } from '^/types';
@@ -37,7 +38,7 @@ function handleOnKeyDown(event: KeyboardEvent) {
 }
 
 function App() {
-  const [, setIsError] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
   const { wordList, loadWordList, randomReset } = useAppStore();
 
   useLoadWordList({
@@ -55,6 +56,12 @@ function App() {
 
   useGlobalKeyDown({ handleOnKeyDown });
 
+  const noWordListDisplay = isError ? (
+    <ErrorScreen />
+  ) : (
+    <LoadingScreen />
+  );
+
   const display = wordList ? (
     <>
       <Title />
@@ -65,7 +72,7 @@ function App() {
       <Result />
     </>
   ) : (
-    <LoadingScreen />
+    noWordListDisplay
   );
 
   return (

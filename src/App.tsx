@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '^/App.css';
 
 import Board from '^/components/Board';
@@ -15,7 +15,6 @@ import { Alphabet } from '^/types';
 import { useLoadWordList } from '^/hooks/useLoadWordList';
 import { useGlobalKeyDown } from '^/hooks/useGlobalKeyDown';
 
-// Initialize keydown event
 function handleOnKeyDown(event: KeyboardEvent) {
   switch (event.code) {
     case 'KeyA': case 'KeyB': case 'KeyC': case 'KeyD': case 'KeyE':
@@ -38,22 +37,7 @@ function handleOnKeyDown(event: KeyboardEvent) {
 }
 
 function App() {
-  const [isError, setIsError] = useState<boolean>(false);
-  const { wordList, loadWordList, randomReset } = useAppStore();
-
-  useLoadWordList({
-    wordList,
-    onSuccess: (recievedWordList) => {
-      loadWordList(recievedWordList);
-      randomReset();
-    },
-    onError: (error) => {
-      // eslint-disable-next-line no-console
-      console.error(error);
-      setIsError(true);
-    },
-  });
-
+  const { wordList, isError } = useLoadWordList();
   useGlobalKeyDown({ handleOnKeyDown });
 
   const noWordListDisplay = isError ? (

@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
 import '^/App.css';
 
 import Board from '^/components/Board';
@@ -9,10 +8,13 @@ import TouchInput from '^/components/TouchInput';
 import ResultButton from '^/components/ResultButton';
 import Result from '^/components/Result';
 import LoadingScreen from '^/components/LoadingScreen';
-import useAppStore from '^/store';
-import { Alphabet, AxiosGetWordleWordListResponse } from '^/types';
+import ErrorScreen from '^/components/ErrorScreen';
 
-// Initialize keydown event
+import useAppStore from '^/store';
+import { Alphabet } from '^/types';
+import { useLoadWordList } from '^/hooks/useLoadWordList';
+import { useGlobalKeyDown } from '^/hooks/useGlobalKeyDown';
+
 function handleOnKeyDown(event: KeyboardEvent) {
   switch (event.code) {
     case 'KeyA': case 'KeyB': case 'KeyC': case 'KeyD': case 'KeyE':
@@ -35,33 +37,14 @@ function handleOnKeyDown(event: KeyboardEvent) {
 }
 
 function App() {
-  const { wordList, loadWordList, randomReset } = useAppStore();
-  useEffect(() => {
-    if (!wordList) {
-      (async () => {
-        try {
-          const response = await axios.get<AxiosGetWordleWordListResponse>('https://read-only-api-endpoints-kuman514.vercel.app/react-wordle/word-list');
-          if (response.status === 200) {
-            loadWordList(response.data.data);
-            randomReset();
-          }
-        } catch (e) {
-          if (axios.isAxiosError(e)) {
-            // eslint-disable-next-line no-console
-            console.error(e);
-          }
-        }
-      })();
-    }
-  }, [wordList]);
+  const { wordList, isError } = useLoadWordList();
+  useGlobalKeyDown({ handleOnKeyDown });
 
-  useEffect(() => {
-    document.addEventListener('keydown', handleOnKeyDown);
-
-    return () => {
-      document.removeEventListener('keydown', handleOnKeyDown);
-    };
-  }, []);
+  const noWordListDisplay = isError ? (
+    <ErrorScreen />
+  ) : (
+    <LoadingScreen />
+  );
 
   const display = wordList ? (
     <>
@@ -73,7 +56,7 @@ function App() {
       <Result />
     </>
   ) : (
-    <LoadingScreen />
+    noWordListDisplay
   );
 
   return (

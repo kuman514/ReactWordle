@@ -63,6 +63,7 @@ export function getInitGameState() {
     alertMessage: '',
     showResult: true,
     alternativeAlert: false,
+    recentAlertDate: new Date(),
   };
 }
 
@@ -93,7 +94,7 @@ export function onInput(state: AppState, letter: Alphabet): AppState {
     return {
       ...state,
       alertMessage: text.notLoaded,
-      alternativeAlert: !state.alternativeAlert,
+      recentAlertDate: new Date(),
     };
   }
 
@@ -101,7 +102,7 @@ export function onInput(state: AppState, letter: Alphabet): AppState {
     return {
       ...state,
       alertMessage: text.alreadyFinished,
-      alternativeAlert: !state.alternativeAlert,
+      recentAlertDate: new Date(),
     };
   }
 
@@ -123,7 +124,7 @@ export function onErase(state: AppState): AppState {
     return {
       ...state,
       alertMessage: text.notLoaded,
-      alternativeAlert: !state.alternativeAlert,
+      recentAlertDate: new Date(),
     };
   }
 
@@ -131,7 +132,7 @@ export function onErase(state: AppState): AppState {
     return {
       ...state,
       alertMessage: text.alreadyFinished,
-      alternativeAlert: !state.alternativeAlert,
+      recentAlertDate: new Date(),
     };
   }
 
@@ -153,7 +154,7 @@ export function onSubmit(state: AppState): AppState {
     return {
       ...state,
       alertMessage: text.notLoaded,
-      alternativeAlert: !state.alternativeAlert,
+      recentAlertDate: new Date(),
     };
   }
 
@@ -161,7 +162,7 @@ export function onSubmit(state: AppState): AppState {
     return {
       ...state,
       alertMessage: text.alreadyFinished,
-      alternativeAlert: !state.alternativeAlert,
+      recentAlertDate: new Date(),
     };
   }
 
@@ -169,7 +170,7 @@ export function onSubmit(state: AppState): AppState {
     return {
       ...state,
       alertMessage: text.shortLength,
-      alternativeAlert: !state.alternativeAlert,
+      recentAlertDate: new Date(),
     };
   }
 
@@ -177,7 +178,7 @@ export function onSubmit(state: AppState): AppState {
     return {
       ...state,
       alertMessage: text.invalid,
-      alternativeAlert: !state.alternativeAlert,
+      recentAlertDate: new Date(),
     };
   }
 

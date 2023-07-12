@@ -2,20 +2,20 @@ import React from 'react';
 
 import useAppStore from '^/store';
 import Alert from '^/components/Alert';
-import AlternativeAlert from '^/components/AlternativeAlert';
 
 function AlertIndicator() {
-  const { alertMessage, alternativeAlert } = useAppStore();
+  const { alertMessage, recentAlertDate } = useAppStore();
   const showAlert = (alertMessage !== '');
 
   if (!showAlert) {
     return null;
   }
 
-  return alternativeAlert ? (
-    <AlternativeAlert />
-  ) : (
-    <Alert />
+  return (
+    <Alert
+      message={alertMessage}
+      recentDate={recentAlertDate}
+    />
   );
 }
 

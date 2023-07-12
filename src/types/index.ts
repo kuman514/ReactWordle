@@ -36,8 +36,8 @@ export interface AppState {
   submitResult: TryResult[][];
   correctLetters: number;
   alertMessage: string;
+  recentAlertDate: Date;
   showResult: boolean;
-  alternativeAlert: boolean;
 }
 
 export interface AppAction {

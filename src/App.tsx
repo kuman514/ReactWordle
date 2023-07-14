@@ -3,7 +3,7 @@ import '^/App.css';
 
 import Board from '^/components/Board';
 import Title from '^/components/Title';
-import AlertIndicator from '^/components/AlertIndicator';
+import Alert from '^/components/Alert';
 import TouchInput from '^/components/TouchInput';
 import ResultButton from '^/components/ResultButton';
 import Result from '^/components/Result';
@@ -49,7 +49,7 @@ function App() {
   const display = wordList ? (
     <>
       <Title />
-      <AlertIndicator />
+      <Alert />
       <Board />
       <TouchInput />
       <ResultButton />

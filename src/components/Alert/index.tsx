@@ -1,29 +1,27 @@
 import React, { useEffect, useState } from 'react';
+import useAppStore from '^/store';
 
-interface Props {
-  message: string;
-  recentDate: Date;
-}
-
-function Alert({ message, recentDate }: Props) {
-  const [isShowing, setIsShowing] = useState<boolean>(false);
+function Alert() {
+  const { alertMessage, recentAlertDate } = useAppStore();
+  const [isActivated, setIsActivated] = useState<boolean>(false);
+  const isShowAlert = isActivated && (alertMessage !== '');
 
   useEffect(() => {
-    setIsShowing(false);
-  }, [message, recentDate]);
+    setIsActivated(false);
+  }, [alertMessage, recentAlertDate]);
 
   useEffect(() => {
-    if (isShowing) {
+    if (isActivated) {
       return;
     }
 
-    setIsShowing(true);
-  }, [isShowing]);
+    setIsActivated(true);
+  }, [isActivated]);
 
-  return isShowing ? (
+  return isShowAlert ? (
     <div className="Alert">
       <div className="AlertContent">
-        { message }
+        { alertMessage }
       </div>
     </div>
   ) : null;
